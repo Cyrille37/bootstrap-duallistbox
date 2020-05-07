@@ -153,11 +153,24 @@
       return;
     }
 
-    saveSelections(dualListbox, selectIndex);
+    // Cyrille37 patch https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/pull/75
+    //saveSelections(dualListbox, selectIndex);
+    if( ! dualListbox.settings.moveOnSelect )
+    {
+      saveSelections(dualListbox, selectIndex);
+    }
 
     dualListbox.elements['select'+selectIndex].empty().scrollTop(0);
-    var regex = new RegExp($.trim(dualListbox.elements['filterInput'+selectIndex].val()), 'gi'),
-      allOptions = dualListbox.element.find('option'),
+
+    // Cyrille37 patch https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/issues/167
+    //var regex = new RegExp($.trim(dualListbox.elements['filterInput'+selectIndex].val()), 'gi'),
+
+    var filterInput = $
+        .trim(dualListbox.elements['filterInput'+selectIndex].val())
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    var regex = new RegExp(filterInput, 'gi');
+
+    var allOptions = dualListbox.element.find('option'),
       options = dualListbox.element;
 
     if (selectIndex === 1) {
