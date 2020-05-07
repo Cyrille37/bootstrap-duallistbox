@@ -44,7 +44,9 @@ When calling `$("#element").bootstrapDualListbox()` you can pass a parameters ob
 - `bootstrap2Compatible`, defaults to `false`, set this to `true` if you want graphic compatibility with Bootstrap 2.
 - `bootstrap3Compatible`, defaults to `false`, set this to `true` if you want graphic compatibility with Bootstrap 3.
 - `filterTextClear`, defaults to `'show all'`, is the text for the "Show All" button.
+- `filterBtnClass`, defaults to `'btn btn-sm btn-outline-secondary'`, is the css class for the "Show All" button.
 - `filterPlaceHolder`, defaults to `'Filter'`, is the placeholder for the `input` element for filtering elements.
+- `btnClass`, default to `'btn-outline-secondary'`, is css class for move and remove button.
 - `moveSelectedLabel`, defaults to `'Move selected'`, is the label for the "Move Selected" button.
 - `moveAllLabel`, defaults to `'Move all'`, is the label for the "Move All" button.
 - `removeSelectedLabel`, defaults to `'Remove selected'`, is the label for the "Remove Selected" button.
@@ -63,9 +65,9 @@ When calling `$("#element").bootstrapDualListbox()` you can pass a parameters ob
 - `infoTextFiltered`, defaults to `'<span class="label label-warning">Filtered</span> {0} from {1}'`, determines which element format to use when some element is filtered. Remember to insert the `{0}` and `{1} `placeholders.
 - `infoTextEmpty`, defaults to `'Empty list'`, determines the `string` to use when there are no options in the list.
 - `filterOnValues`, defaults to `false`, set this to `true` to filter the `option`s according to their `value`s and not their HTML contents.
-- `iconsPrefix`, defaults to `oi`, set it to whichever prefix your icon family uses.
-- `iconMove`, defaults to `oi-arrow-thick-right`, sets the class for the move icon.
-- `iconRemove`, defaults to `oi-arrow-thick-left`, sets the class for the remove icon.
+- ~~`iconsPrefix`, defaults to `oi`, set it to whichever prefix your icon family uses.~~
+- ~~`iconMove`, defaults to `oi-arrow-thick-right`, sets the class for the move icon.~~
+- ~~`iconRemove`, defaults to `oi-arrow-thick-left`, sets the class for the remove icon.~~
 
 ### Methods
 

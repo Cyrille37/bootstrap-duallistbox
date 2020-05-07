@@ -22,6 +22,7 @@
   var pluginName = 'bootstrapDualListbox',
     defaults = {
       filterTextClear: 'show all',
+      filterBtnClass: 'btn btn-sm btn-outline-secondary',
       filterPlaceHolder: 'Filter',
       moveSelectedLabel: 'Move selected',
       moveAllLabel: 'Move all',
@@ -101,7 +102,7 @@
   }
 
   function formatString(s, args) {
-    console.log(s, args);
+    //console.log(s, args);
     return s.replace(/{(\d+)}/g, function(match, number) {
       return typeof args[number] !== 'undefined' ? args[number] : match;
     });
@@ -169,7 +170,12 @@
       return;
     }
 
-    saveSelections(dualListbox, selectIndex);
+    // Cyrille37 patch https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/pull/75
+    //saveSelections(dualListbox, selectIndex);
+    if( ! dualListbox.settings.moveOnSelect )
+    {
+      saveSelections(dualListbox, selectIndex);
+    }
 
     dualListbox.elements['select'+selectIndex].empty().scrollTop(0);
     var regex,
@@ -183,7 +189,11 @@
     }
 
     try {
-      regex = new RegExp($.trim(dualListbox.elements['filterInput'+selectIndex].val()), 'gi');
+        // Cyrille37 patch https://github.com/istvan-ujjmeszaros/bootstrap-duallistbox/issues/167
+      var filterInput = $
+        .trim(dualListbox.elements['filterInput'+selectIndex].val())
+        .replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      regex = new RegExp(filterInput, 'gi');
     }
     catch(e) {
       // a regex to match nothing
@@ -398,7 +408,7 @@
         '   <label></label>' +
         '   <span class="info-container">' +
         '     <span class="info"></span>' +
-        '     <button type="button" class="btn btn-sm clear1" style="float:right!important;"></button>' +
+        '     <button type="button" class="clear1 '+this.settings.filterBtnClass+'" style="float:right!important;"></button>' +
         '   </span>' +
         '   <input class="form-control filter" type="text">' +
         '   <div class="btn-group buttons">' +
@@ -411,7 +421,7 @@
         '   <label></label>' +
         '   <span class="info-container">' +
         '     <span class="info"></span>' +
-        '     <button type="button" class="btn btn-sm clear2" style="float:right!important;"></button>' +
+        '     <button type="button" class="btn clear2 '+this.settings.filterBtnClass+'" style="float:right!important;"></button>' +
         '   </span>' +
         '   <input class="form-control filter" type="text">' +
         '   <div class="btn-group buttons">' +
